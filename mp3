@@ -1,0 +1,90 @@
+from tkinter import*
+import pygame,sys
+from pygame.locals import*
+from tkinter import filedialog
+from PIL import ImageTk,Image
+import os
+from PIL import ImageTk,Image
+pygame.init() #usando libreria
+
+#funcion open cancion
+
+def abrirarchivo():
+    #guardar la cancion a reproducir
+    cancion=filedialog.askopenfilename()
+    print(cancion)
+    pygame.mixer.music.load(cancion)
+
+    pass
+
+def PlaySong():
+    pygame.mixer.music.play()
+    pass
+
+def stopsong():
+    pygame.mixer.music.stop()
+    pass
+
+def pausesong():
+    pygame.mixer.music.pause()
+    pass
+
+def reaunudarsong():
+    pygame.mixer.music.unpause()
+    pass
+
+def subir():
+    volumenlevel=pygame.mixer_music.get_volume() + 0.5
+    print(volumenlevel)
+    pygame.mixer_music.set_volume(volumenlevel)
+
+def bajar():
+    volumenlevel=pygame.mixer.music.get_volume()-0.5
+    print(volumenlevel)
+    pygame.mixer_music.set_volume(volumenlevel)
+
+
+
+raiz=Tk()
+raiz.title("Reproductor MP3")
+raiz.iconbitmap('goku.ico')
+raiz.geometry("800x800")
+raiz.resizable(0,0) 
+frameprincipal=Frame(raiz,bg="#4a4a4a")
+tituloreproductor=Label(frameprincipal,text="Reproductor MP3",font=("Roboto",30,"bold"),bg="#4a4a4a",fg="#a5a5a5")
+
+
+imgato=Image.open("gato.png")
+imgat=imgato.resize((150,135))
+img=ImageTk.PhotoImage(imgat)
+
+fotocat=Label(raiz,image=img).place(x=380,y=80)
+
+frameprincipal.pack(fill="both",expand=1)
+tituloreproductor.pack()
+
+
+ButtonAbrir=Button(frameprincipal,text="Open Song",bg="#a5eea0",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,cursor="arrow",command=abrirarchivo)
+ButtonAbrir.place(relx=0.045,rely=0.5)
+
+Buttonplaysong=Button(frameprincipal,text="Play song",bg="#42ab49",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=PlaySong)
+Buttonplaysong.place(relx=0.25,rely=0.5)
+
+ButtonStop=Button(frameprincipal,text="Stop Song",bg="#550099",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=stopsong)
+ButtonStop.place(relx=0.45,rely=0.5)
+
+Buttonresume=Button(frameprincipal,text="Reaunudar",bg="#ffc400",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=reaunudarsong)
+Buttonresume.place(relx=0.65,rely=0.5)
+
+
+ButtonPause=Button(frameprincipal,text="Pause",bg="#a5eea0",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=pausesong)
+ButtonPause.place(relx=0.85,rely=0.5)
+
+ButtonVolumenmas=Button(frameprincipal,text="Subir Volumen",bg="#a5eea0",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=subir)
+ButtonVolumenmas.place(relx=0.2,rely=0.20)
+
+Buttonvolumenmenos=Button(frameprincipal,text="Bajar volumen",bg="#a5eea0",fg="#fbfbfb",font=("Roboto",15,"bold"),width=10,height=2,command=bajar)
+Buttonvolumenmenos.place(relx=0.8,rely=0.20)
+
+
+raiz.mainloop()
